@@ -1,27 +1,39 @@
-# MdbAngularFree
+# Movie-App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+This project was generated with [Angular CLI , firebase , ], 
 
-## Development server
+## packages
+1-ng2-search-filter .
+2-MDBBootstrap
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## work flow
 
-## Code scaffolding
+1-route to home page where you find
+a-favourite movie link route movie favourite it is contain of localstorage movie .
+b- search input to search in all movies 
+c - movie card with like and favourite action 
+d - massage icon where navigate to massage .but this logic still not work for deadline 
+e- button for  nivegatie  to movie details screan with snapshot id 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+2- movie details page it is contain movie details i choose it from home page 
+a- movie title .
+b- movie details .
+d - comment in the end of page  but this is still tuned 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+3- favourite movie page 
+to show favourite movie from localstorage 
 
-## Running unit tests
+4- login page you can login just if you register else you shoud sign up before it 
+a- with validate and compare it wit regster emal and password in firebase .
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+note "you can login with   email = safaaali@gmail.com , password = 0305mlmlS "
+5 - sign up when you sign up your data will submit into firebase database and save there 
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+6 - chat module to make chating with user i will submit him to firebase but it is still not completed for one issue i try with it 
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+7 - movie app url with  
+a- firebase https://movie-4c881.web.app/home ;
+b - github https://github.com/safaa-ali/movie-app.git
