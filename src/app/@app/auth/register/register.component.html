@@ -1,0 +1,207 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5">
+      <mdb-card>
+        <form
+          class="text-center border border-light p-5"
+          [formGroup]="registerationForm"
+          novalidate
+          (ngSubmit)="createForm(registerationForm)"
+        >
+          <p class="h4 mb-4">Sign Up</p>
+          <!-- Fierst Name -->
+          <div class="form-group">
+            <input
+              type="text"
+              id="defaultregisterationFormEmail"
+              class="form-control"
+              placeholder="First Name"
+              formControlName="fName"
+            />
+            <div
+              *ngIf="
+                registerationForm.controls['fName'].invalid &&
+                (registerationForm.controls['fName'].dirty ||
+                  registerationForm.controls['fName'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div
+                *ngIf="
+                  registerationForm.controls['fName'].errors.required ||
+                  registerationForm.controls['fName'].errors.pattern
+                "
+              >
+                First name is required .
+              </div>
+            </div>
+          </div>
+          <!-- Last Name -->
+          <div class="form-group">
+            <input
+              type="text"
+              id="defaultregisterationFormEmail"
+              class="form-control"
+              placeholder="Last Name"
+              formControlName="lName"
+            />
+            <div
+              *ngIf="
+                registerationForm.controls['lName'].invalid &&
+                (registerationForm.controls['lName'].dirty ||
+                  registerationForm.controls['lName'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div
+                *ngIf="
+                  registerationForm.controls['fName'].errors.required ||
+                  registerationForm.controls['fName'].errors.pattern
+                "
+              >
+                Last name is required .
+              </div>
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="form-group">
+            <input
+              type="email"
+              id="defaultregisterationFormEmail"
+              class="form-control"
+              placeholder="E-mail"
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                registerationForm.controls['email'].invalid &&
+                (registerationForm.controls['email'].dirty ||
+                  registerationForm.controls['email'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div
+                *ngIf="
+                  registerationForm.controls['email'].errors.required ||
+                  registerationForm.controls['email'].errors.pattern
+                "
+              >
+                Email is required As name@gmail.com.
+              </div>
+            </div>
+          </div>
+          <div class="form-group hideConfirm">
+            <!-- Password -->
+            <input
+              [type]="hidenPass ? 'password' : 'text'"
+              id="defaultregisterationFormPassword"
+              class="form-control"
+              placeholder="Password"
+              formControlName="password"
+            />
+            <div (click)="hidePass()" class="hideConPassword">
+              <ng-container *ngIf="hidenPass; else passwordHide">
+                <i class="fas fa-eye"></i>
+              </ng-container>
+              <ng-template #passwordHide>
+                <i class="fas fa-eye-slash"></i>
+              </ng-template>
+            </div>
+            <div
+              *ngIf="
+                registerationForm.controls['password'].invalid &&
+                (registerationForm.controls['password'].dirty ||
+                  registerationForm.controls['password'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div
+                *ngIf="
+                  registerationForm.controls['password'].errors.required ||
+                  registerationForm.controls['password'].errors.pattern
+                "
+              >
+                Password is required As 12dfGt.
+              </div>
+            </div>
+          </div>
+          <div class="form-group hideConfirm">
+            <!-- Password -->
+            <input
+              [type]="hidenConfirm ? 'password' : 'text'"
+              id="defaultregisterationFormPassword"
+              class="form-control"
+              placeholder="Confirm Password"
+              formControlName="confirmPass"
+            />
+            <div (click)="hideConfirmPass()" class="hideConPassword">
+              <ng-container *ngIf="hidenConfirm; else confpasswordHide">
+                <i class="fas fa-eye"></i>
+              </ng-container>
+              <ng-template #confpasswordHide>
+                <i class="fas fa-eye-slash"></i>
+              </ng-template>
+            </div>
+            <div
+              *ngIf="
+                registerationForm.controls['confirmPass'].invalid &&
+                (registerationForm.controls['confirmPass'].dirty ||
+                  registerationForm.controls['confirmPass'].touched)
+              "
+              class="alert alert-danger"
+            >
+              password dosen't match
+
+              <div
+                *ngIf="
+                  registerationForm.controls['confirmPass'].errors.required
+                "
+              >
+                confirm password is required
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div>
+              <!-- Remember me -->
+              <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
+            </div>
+            <div>
+
+              <!-- Forgot password -->
+              <a href="#">Forgot password?</a>
+            </div>
+          </div>
+
+          <!-- Sign in button -->
+          <button
+            mdbBtn
+            color="info"
+            block="true"
+            class="my-4 mb-4"
+            type="submit"
+            [disabled]="registerationForm.invalid"
+          >
+            Sign up
+          </button>
+<a  [routerLink]="['/auth']" >Login</a>
+          <!-- Social login -->
+          <p class="mt-3">or sign in with:</p>
+
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="facebook"></mdb-icon>
+          </a>
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="twitter"></mdb-icon>
+          </a>
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="linkedin"></mdb-icon>
+          </a>
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="github"></mdb-icon>
+          </a>
+        </form>
+      </mdb-card>
+    </div>
+  </div>
+</div>

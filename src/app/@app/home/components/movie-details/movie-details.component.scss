@@ -1,0 +1,112 @@
+.container-fluid {
+  width: 100%;
+
+  .col-lg-3 {
+    margin-top: 100px ;
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+
+  .card {
+    position: relative;
+    transition: all 0.5s ease-in;
+
+    .card__image {
+      display: block;
+      width: 100%;
+      height: 360px;
+      cursor: pointer;
+    }
+    .card__overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      visibility: none;
+      transition: 0.5s ease;
+      background-color: hsl(300, 4%, 42%, 0.5);
+      .overlay__text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      h3 {
+        padding: 20px 0;
+      }
+    }
+  }
+
+  .card:hover .card__overlay {
+    opacity: 1;
+  }
+  .movie-details {
+    text-transform: capitalize;
+    .sub-title {
+      color: rgb(160, 52, 52);
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+      &:hover{
+        color: #6ea000;
+
+      }
+    }
+
+  }
+  .comment {
+    p {
+      margin: 20px 40px 6px 0;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: capitalize;
+      color: rgb(153, 20, 20);
+      &:hover {
+        color: #6ea000;
+      }
+    }
+
+  }
+}
+
+::ng-deep {
+  .mdb-color.lighten-3 {
+    background-color: transparent !important;
+  }
+  .icon {
+    .fa,
+    .fas {
+      font-size: 40px;
+      color: rgb(153, 20, 20);
+
+    }
+    .fa:hover,
+    .fas:hover {
+      color: #6ea000;
+    }
+  }
+  .btn-success {
+    background-color: #6ea000!important;
+    color: #fff;
+    margin-left: 36px;
+}
+}
+
+@media only screen and (max-width: 1200px) {
+  .container-fluid {
+    .col-lg-3 {
+      margin: 20px 0;
+    }
+  }
+}

@@ -1,0 +1,137 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 signup-form">
+      <div class="form-section">
+        <div id="signin-form">
+          <form  novalidate="novalidate">
+
+            <div class="form-heading">
+              <h3>Sign in to your Syncfusion account</h3>
+            </div>
+            <div class="form-field">
+              <div class="form-textbox">
+                <label class="form-control-placeholder" for="UserName"
+                >Email</label
+              >
+                <input
+                  class="form-control content-medium"
+                  id="user-name"
+                  maxlength="100"
+                  name="UserName"
+                  required="required"
+                  spellcheck="false"
+                  tabindex="1"
+                  type="text"
+                  value=""
+                />
+
+              </div>
+            </div>
+            <div class="form-field">
+              <div class="form-textbox">
+                <label class="form-control-placeholder" for="Password"
+                >Password</label
+              >
+                <input
+                  class="form-control content-medium"
+                  id="password"
+                  maxlength="30"
+                  name="Password"
+                  required="required"
+                  tabindex="2"
+                  type="password"
+                />
+
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label for="">Type Your Massage</label>
+              <textarea class="form-control " name="" id="" rows="3"></textarea>
+            </div>
+            <div class="form-field logon-field">
+              <button  type="button"  mdbBtn color="primary"  mdbWavesEffect>Send</button>
+
+            </div>
+            <div class="new-register mt-4 mb-4">
+              <p class="lead">
+                Don’t have  account yet?
+                <a class="bold" [routerLink]="['/auth/signup']" > SIGN UP</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="freeaccount">
+      <div id="right_section">
+        <div id="free_account">
+          <h3>Free Account Benefits</h3>
+          <hr />
+          <ul class="content-small">
+            <li>
+              <span>Access to a 30-day free trial of any of our products.</span>
+            </li>
+            <li>
+              <span
+                ><a
+                  href="https://s3.amazonaws.com/files2.syncfusion.com/web/support/sla/18.2/syncfusion_software_support_sla.pdf"
+                  >"Access to 24x5 support</a
+                >
+                by developers via the
+                <a href="https://www.syncfusion.com/forums">forum</a>,
+                <a href="https://www.syncfusion.com/feedback"
+                  >feature &amp; feedback page</a
+                >,
+                <a
+                  href="https://www.syncfusion.com/forums/156460/introducing-live-chat-support"
+                  >chat</a
+                >, and
+                <a
+                  href="https://www.syncfusion.com/support/directtrac/incidents/newincident"
+                  >Direct-Trac.</a
+                ></span
+              >
+            </li>
+            <li>
+              <span
+                >180+ <a href="/ebooks">ebooks</a> on the latest technologies,
+                industry trends, and research topics.</span
+              >
+            </li>
+            <li>
+              <span
+                >Largest collection of over 7,000 flat and wireframe icons for
+                free with Syncfusion
+                <a href="/downloads/metrostudio">Metro Studio</a>.</span
+              >
+            </li>
+            <li>
+              <span
+                >Free and unlimited access to Syncfusion technical
+                <a href="https://www.syncfusion.com/blogs">blogs</a> and
+                <a href="/resources/techportal/whitepapers">white papers</a
+                >.</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div id="top_heading">
+          <h3>Syncfusion is trusted by</h3>
+          <h3>23,000+ businesses worldwide</h3>
+
+        </div>
+
+        <img
+          alt="syncfusion customers"
+          src="https://cdn.syncfusion.com/content/images/Images/latest-customer-logos.png"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

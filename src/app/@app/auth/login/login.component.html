@@ -1,0 +1,115 @@
+
+
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5">
+      <mdb-card>
+        <form
+          class="text-center border border-light p-5"
+          [formGroup]="loginForm"
+          novalidate
+          (ngSubmit)="createForm(loginForm)"
+        >
+          <p class="h4 mb-4">Sign in</p>
+
+          <!-- Email -->
+          <div class="form-group">
+            <input
+              type="email"
+              id="defaultLoginFormEmail"
+              class="form-control"
+              placeholder="E-mail"
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                loginForm.controls['email'].invalid &&
+                (loginForm.controls['email'].dirty ||
+                  loginForm.controls['email'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div *ngIf="loginForm.controls['email'].errors.required||loginForm.controls['email'].errors.pattern">
+                Email is required As name@gmail.com.
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group hideConfirm">
+            <!-- Password -->
+            <input
+            [type]="hidenPass ? 'password' : 'text'"
+              id="defaultLoginFormPassword"
+              class="form-control"
+              placeholder="Password"
+              formControlName="password"
+            />
+            <div (click)="hidePass()" class="hideConPassword">
+              <ng-container *ngIf="hidenPass; else passwordHide">
+                <i class="fas fa-eye"></i>
+              </ng-container>
+              <ng-template #passwordHide>
+                <i class="fas fa-eye-slash"></i>
+              </ng-template>
+            </div>
+            <div
+              *ngIf="
+                loginForm.controls['password'].invalid &&
+                (loginForm.controls['password'].dirty ||
+                  loginForm.controls['password'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <div *ngIf="loginForm.controls['password'].errors.required||loginForm.controls['password'].errors.pattern">
+                Password is required As 12dfGt.
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div>
+              <!-- Remember me -->
+              <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
+            </div>
+            <div>
+              <!-- Forgot password -->
+              <a href="#">Forgot password?</a>
+            </div>
+          </div>
+
+          <!-- Sign in button -->
+          <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="loginForm.invalid">
+            Sign in
+          </button>
+
+          <!-- Register -->
+          <p>
+            <a [routerLink]="['/auth/signup']" >Register</a>
+          </p>
+
+          <!-- Social login -->
+          <p>or sign in with:</p>
+
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="facebook"></mdb-icon>
+          </a>
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="twitter"></mdb-icon>
+          </a>
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="linkedin"></mdb-icon>
+          </a>
+          <a type="button" class="light-blue-text mx-2">
+            <mdb-icon fab icon="github"></mdb-icon>
+          </a>
+        </form>
+      </mdb-card>
+    </div>
+  </div>
+</div>
+
+

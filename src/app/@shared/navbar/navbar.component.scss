@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+::ng-deep {
+  .navbar {
+    background-color: #eee !important;
+    padding: 1.4rem 1rem;
+    font-family: "Poppins", sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999999999;
+    width: 100%;
+    box-shadow: none !important;
+  }
+  .navbar-brand {
+    color: rgb(153, 20, 20) !important;
+    font-weight: bold;
+    &.hover{
+      color:green !important;
+    }
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .navbar .nav-item .nav-link .fab,
+  .navbar .nav-item .nav-link .far,
+  .navbar .nav-item .nav-link .fas {
+    padding-right: 8px !important;
+    padding-left: 8px !important;
+  }
+  .nav-link {
+    padding: 0 !important;
+  }
+  .navbar .nav-item .nav-link {
+    display: block;
+    margin-left: 14px;
+  }
+
+  .navbar.navbar-dark .breadcrumb .nav-item .nav-link, .navbar.navbar-light .navbar-nav .nav-item .nav-link{
+    color: rgb(153, 20, 20) !important;
+    font-size: 18px;
+  }
+}
+
+.btn {
+  padding: 9px 2.14rem;
+  box-shadow: none;
+}
+.navbar.navbar-light form .md-form input {
+  border-bottom: none;
+}
+
+.filter-item {
+a{
+  text-transform: capitalize;
+  color: rgb(153, 20, 20) !important;
+}
+
+
+}
+@media only screen and (max-width: 900px) {
+ ::ng-deep{
+  .navbar.navbar-dark .breadcrumb .nav-item .nav-link, .navbar.navbar-light .navbar-nav .nav-item .nav-link{
+ margin: 10px 0;
+  }
+ }
+}

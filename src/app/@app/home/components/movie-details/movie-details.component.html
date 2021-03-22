@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row mt-4 mb-4">
+    <div class="col-lg-3">
+      <div class="icon ml-4">
+        <i class="fas fa-angle-double-left" [routerLink]="['/home']"></i>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card">
+        <img src="{{ favouriteData.image.original }}" class="card__image" />
+
+        <div class="card__overlay">
+          <div class="overlay__text">
+            <img
+              src="//cdn.syncfusion.com/content/images/forum/syncfusion_logo.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="movie-details">
+        <h3 class="sub-title">{{ favouriteData.name }}</h3>
+        <p class="movie-details-content">{{ favouriteData.summary }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="comment">
+    <p class="waves-light" (click)="test.toggle()" mdbWavesEffect>
+      Type comment
+    </p>
+<form   [formGroup]="commentForm">
+  <div class="md-form" mdbCollapse #test="bs-collapse">
+    <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
+    <textarea
+      type="text"
+      id="form8"
+      class="md-textarea form-control"
+      mdbInput
+      formControlName="comment"
+    ></textarea >
+    <label for="form8">Typing </label>
+    <button type="button" mdbBtn color="success" mdbWavesEffect class="ml-4" (click)="sendComment()">
+      Send Comment
+    </button>
+  </div>
+</form>
+
+  </div>
+</div>
+
+<app-footer></app-footer>

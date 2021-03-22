@@ -1,0 +1,68 @@
+
+<app-navbar></app-navbar >
+
+ <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+  <mdb-carousel-item>
+    <div class="view w-100">
+      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" alt="First slide">
+      <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption">
+      <h3 class="h3-responsive">SMovieWeb TO SMART MOvie</h3>
+      <p>Mank, The Dark Knight, and Harry Potter star Gary Oldman has just turned 63 as fans celebrate their favorite roles from the iconic 'chameleon actor.'</p>
+      <button type="button" mdbBtn color="primary" mdbWavesEffect>Learn More </button>
+
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <div class="view w-100">
+      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg" alt="Second slide">
+      <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption">
+      <h3 class="h3-responsive">SMovieWeb TO SMART MOvie</h3>
+      <p>Mank, The Dark Knight, and Harry Potter star Gary Oldman has just turned 63 as fans celebrate their favorite roles from the iconic 'chameleon actor.'</p>
+      <button type="button" mdbBtn color="primary" mdbWavesEffect>Learn More </button>
+
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <div class="view w-100">
+      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg" alt="Third slide">
+      <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption">
+      <h3 class="h3-responsive">SMovieWeb TO SMART MOvie</h3>
+      <p>Mank, The Dark Knight, and Harry Potter star Gary Oldman has just turned 63 as fans celebrate their favorite roles from the iconic 'chameleon actor.'</p>
+      <button type="button" mdbBtn color="primary" mdbWavesEffect>Learn More </button>
+
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
+<div class="search-form">
+  <div class="search-hero ">
+    <mdb-icon fas icon="search" class="prefix search-icon"></mdb-icon>
+
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search Here ....">
+  </div>
+</div>
+
+
+<div class="row mb-4" >
+    <div class="col-lg-3" *ngFor="let item of movie | filter:searchText">
+      <app-movie-card  [item]="item"></app-movie-card>
+  </div>
+</div>
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+
+
+
+

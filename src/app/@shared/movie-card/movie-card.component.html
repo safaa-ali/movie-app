@@ -1,0 +1,47 @@
+<div class="card" >
+  <img
+  [src]="item.image['original']"
+    class="card__image"
+
+  />
+  <div class="card__overlay">
+    <div class="overlay__text">
+      <h3>{{item.name}}</h3>
+
+      <mdb-card-footer class="mdb-color lighten-3 text-center">
+        <ul class="list-unstyled list-inline font-small mt-3">
+          <li class="list-inline-item mr-2">
+            <a  class="white-text">
+              <mdb-icon far size="2x"  icon="comments" [routerLink]="['/home/comment']"   class="pr-1"></mdb-icon
+            ></a>
+          </li>
+          <li class="list-inline-item mr-2" [hidden]="!like">
+            <a  class="white-text ">
+              <mdb-icon far size="2x"  icon="thumbs-up" (click)="likeMovi(item)"></mdb-icon>
+            </a>
+            <li class="list-inline-item mr-2">
+                <mdb-icon size="2x"  class="indigo-text" far icon="thumbs-up" [hidden]="like" (click)="disLikeMovi(item.id)"></mdb-icon>
+          </li>
+          <!-- <li class="list-inline-item ">
+            <a  class="white-text">
+              <mdb-icon fas icon="reply"></mdb-icon>
+            </a>
+          </li> -->
+          <li class="list-inline-item mr-2">
+            <a  >
+              <mdb-icon fas icon="heart" size="2x"  class="white-text" (click)="addFavouriteMovi(item)" [hidden]="!favouriteStuts" ></mdb-icon>
+              <mdb-icon fas icon="heart-broken" size="2x"  class="indigo-text" (click)="removeFavouriteMovi(item.id)"  [hidden]="favouriteStuts"></mdb-icon>
+
+            </a>
+          </li>
+
+        </ul>
+        <button type="button" class="btn"
+         (click)="toMovieDetails(item.id)"
+
+          >movie details</button>
+
+      </mdb-card-footer>
+    </div>
+  </div>
+</div>
