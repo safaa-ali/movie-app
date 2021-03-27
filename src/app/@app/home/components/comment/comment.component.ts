@@ -2,26 +2,12 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { DataService } from './../../../../@core/data.service';
 import { ConnectionService } from './../../../../@core/connection.service';
 import { Component, OnInit } from '@angular/core';
-// import { v4 as commentId } from 'uuid';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss'],
-  styles: [`.heading {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    }
-.img{
-  width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 30px;
-    cursor: pointer;
-}
-    `]
+  styleUrls: ['./comment.component.scss']
+
 
 })
 export class CommentComponent implements OnInit {
@@ -34,6 +20,9 @@ export class CommentComponent implements OnInit {
   nameUser: string;
   commentId
   userId: any;
+  isReplyHidden=false
+  replyBody: any;
+  replyImage: any;
   constructor (private _connectionService: ConnectionService,  private fb: FormBuilder) {
     this.commentForm = this.fb.group({
       comment: new FormControl(null),
@@ -90,12 +79,14 @@ export class CommentComponent implements OnInit {
         username:this.nameUser,
         commentid:this.commentId,
         replyComment:[{
-           ...this.replyForm.get('reply').value,
-           ...this.replyForm.get('replyImg').value,
+           reply:this.replyBody,
+           replyImg:this.replyImage,
            uidComment:this.commentId,
            userid:this.userId,
           }] ,
       };
+      console.log(commentdata);
+
      this._connectionService.post('comments',commentdata)
      this.commentForm.reset()
     }else{
@@ -111,45 +102,51 @@ export class CommentComponent implements OnInit {
   }
 
   reply(){
-    let row = document.createElement('div');
-      row.className = 'row col-lg-8 comment-container';
-      row.innerHTML = `
+    // let row = document.createElement('div');
+    //   row.className = 'row col-lg-8 comment-container';
+    //   row.innerHTML = `
 
-      <form [formGroup]="replyForm" (ngSubmit)="onSubmitReply(replyForm)">
-        <div class="heading">
-          <figure class="d-flex">
-            <label for="imgInput">
-              <img class="img"
-                src="./../../../../../assets/images/pngtree-user-vector-avatar-png-image_1541962.jpg"
-              />
-            </label>
-            <input
-              type="file"
-              id="imgInput"
-              class="text-nowrap text-truncate"
-              (change)="uploadImage($event)"
-            />
-          </figure>
-        </div>
-        <div class="text">
-          <textarea
-            formControlName="reply"
-            cols="10"
-            rows="4"
-            class="form-control"
-            placeholder="Your comment here ..."
-          >
-          </textarea>
-        </div>
-        <button type="submit" mdbBtn color="primary" mdbWavesEffect>
-          send reply
-        </button>
-      </form>
-    `;
-      document.querySelector('.showInputField').appendChild(row);
+    //   // <form [formGroup]="replyForm" (ngSubmit)="onSubmitReply(replyForm)">
+    //   //   <div class="heading">
+    //   //     <figure class="d-flex">
+    //   //       <label for="imgInput">
+    //   //         <img class="img"
+    //   //           src="./../../../../../assets/images/pngtree-user-vector-avatar-png-image_1541962.jpg"
+    //   //         />
+    //   //       </label>
+    //   //       <input
+    //   //         type="file"
+    //   //         id="imgInput"
+    //   //         class="text-nowrap text-truncate"
+    //   //         (change)="uploadImage($event)"
+    //   //       />
+    //   //     </figure>
+    //   //   </div>
+    //   //   <div class="text">
+    //   //     <textarea
+    //   //       formControlName="reply"
+    //   //       cols="10"
+    //   //       rows="4"
+    //   //       class="form-control"
+    //   //       placeholder="Your comment here ..."
+    //   //     >
+    //   //     </textarea>
+    //   //   </div>
+    //   //   <button type="submit" mdbBtn color="primary" mdbWavesEffect>
+    //   //     send reply
+    //   //   </button>
+    //   // </form>
+    // `
+    ;
+      // document.querySelector('.showInputField').appendChild(row);
+      this.isReplyHidden = !this.isReplyHidden
   }
   onSubmitReply(replyForm){
-    console.log(replyForm);
+
+  this.replyBody=  replyForm.value.reply;
+  this.replyImage=  replyForm.value.replyImg;
+
+  console.log(this.replyImage," ",this.replyBody);
 
   }
 }

@@ -55,7 +55,37 @@
         </div>
         <div class="text">{{ item.comment }}</div>
 
-            <div class="showInputField">
+            <div class="showInputField" [hidden]="!isReplyHidden">
+              <form [formGroup]="replyForm" (ngSubmit)="onSubmitReply(replyForm)">
+                <div class="heading">
+                  <figure class="d-flex">
+                    <label for="imgInput">
+                      <img class="img"
+                        src="./../../../../../assets/images/pngtree-user-vector-avatar-png-image_1541962.jpg"
+                      />
+                    </label>
+                    <input
+                      type="file"
+                      id="imgInput"
+                      class="text-nowrap text-truncate"
+                      (change)="uploadImage($event)"
+                    />
+                  </figure>
+                </div>
+                <div class="text">
+                  <textarea
+                    formControlName="reply"
+                    cols="10"
+                    rows="4"
+                    class="form-control"
+                    placeholder="Your comment here ..."
+                  >
+                  </textarea>
+                </div>
+                <button type="submit" mdbBtn color="warning" mdbWavesEffect>
+                  send reply
+                </button>
+              </form>
             </div>
       </div>
     </div>
