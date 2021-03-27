@@ -8,7 +8,10 @@ This project was generated with [Angular CLI , firebase , ],
 
 ## work flow
 
+
 1-route to home page where you find : 
+
+
 a-favourite movie link route movie favourite it is contain of localstorage movie .
 b- search input to search in all movies 
 c - movie card with like and favourite action 
@@ -58,3 +61,5 @@ note :-
   that prevent me from completing it those days
   I tried a lot to finish it and deliver you a complete
  project to a large extent that can be used
+
+
