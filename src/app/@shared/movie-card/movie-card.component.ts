@@ -43,18 +43,17 @@ this.favouritMovies = JSON.parse(localStorage.getItem('favouriteMovies'))
 
   removeFavouriteMovie(movieID) {
     if (confirm("are you sure to delete this movie !") === true) {
-      // if (JSON.parse(localStorage.getItem('favouriteMovies'))) {
-      //   this.favouritMovies = JSON.parse(localStorage.getItem('favouriteMovies'));
-      //   for (let item of this.favouritMovies) {
-      //     if (item.id === movieID) {
-      //       this.favouritMovies.splice(this.favouritMovies.indexOf(item), 1);
-      //       localStorage.setItem('favouriteMovies', JSON.stringify(this.favouritMovies))
+      if (JSON.parse(localStorage.getItem('favouriteMovies'))) {
+        this.favouritMovies = JSON.parse(localStorage.getItem('favouriteMovies'));
+        for (let item of this.favouritMovies) {
+          if (item.id === movieID) {
+            this.favouritMovies.splice(this.favouritMovies.indexOf(item), 1);
+            localStorage.setItem('favouriteMovies', JSON.stringify(this.favouritMovies))
 
-      //     }
-      //   }
+          }
+        }
 
-      // }
-      this._dataService.removeMovie(movieID)
+      }
 
 
     } else {

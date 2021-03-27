@@ -22,11 +22,6 @@ const routes: Routes = [
       {
         path:'movie-details/:id',component:MovieDetailsComponent,
       },
-      {
-        path:'comment',component:CommentComponent,
-        canActivate:[AuthGuard]
-
-      },
     ]
   }
 ];
