@@ -1,5 +1,7 @@
+import { DataService } from './../../../../@core/data.service';
 import { ConnectionService } from './../../../../@core/connection.service';
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, ChangeDetectorRef, OnChanges } from '@angular/core';
+
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -7,36 +9,31 @@ import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 })
 export class LandingPageComponent implements OnInit {
-  movie ;
+  movie;
   searchText = "";
+
   constructor (
     private _connectionServ: ConnectionService,
+    private ref: ChangeDetectorRef,
+    private _dataService: DataService
   ) {
 
   }
 
   ngOnInit(): void {
-
     this._connectionServ.get('https://api.tvmaze.com/shows/1/episodes').subscribe(res => {
-      console.log(res);
       this.movie = res
 
     })
-    // use firbase data
-    // this._connectionServ.getAll("movies").subscribe((res: any) => {
-
-    //   console.log(res);
-    //   let productdata = []
-    //   res.forEach(element => {
-
-    //     productdata.push({ fireId: element.payload.doc.id, ...element.payload.doc.data() })
-    //   });
-
-    //   console.log(productdata);
-    //   this.movie = [...productdata]
-    // })
+    this._dataService.sendOptionVal.subscribe(movies => {
+      this.movie = movies
+    });
   }
 
 
 
 }
+
+
+
+

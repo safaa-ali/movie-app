@@ -1,59 +1,76 @@
-
- <!--Navbar-->
+<!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light indigo">
-
   <mdb-navbar-brand>
     <a class="navbar-brand" href="#">
       <a class="navbar-brand mr-auto" [routerLink]="['/home']">MOVIES APP</a>
     </a>
   </mdb-navbar-brand>
 
-
   <!-- Collapsible content -->
   <links>
-
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item ">
-        <a class="nav-link waves-light color"  mdbWavesEffect [routerLink]="['/home/favourite-movie']"  >Favourite Movies</a>
+      <li class="nav-item">
+        <a
+          class="nav-link waves-light color"
+          mdbWavesEffect
+          [routerLink]="['/home/favourite-movie']"
+          >Favourite Movies</a
+        >
       </li>
 
       <!-- Dropdown -->
       <li class="nav-item dropdown" dropdown>
-        <a   type="button" class="nav-link  waves-light color" >
-
-            <mdb-icon fas icon="user"  mdbDropdownToggle mdbWavesEffect class="nav-link black-text  waves-light color"></mdb-icon>
+        <a type="button" class="nav-link waves-light color">
+          {{nameUser}}
+          <i class="fas fa-caret-down" mdbDropdownToggle mdbWavesEffect></i>
         </a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/auth']">Login</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/auth/signup']"> Sign up</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()"> log out</a>
+
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/auth']"
+            >Login</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/auth/signup']"
+          >
+            Sign up</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            (click)="logout()"
+          >
+            log out</a
+          >
         </div>
       </li>
-       <li class="nav-item filter-item">
-        <a class="nav-link waves-light" mdbWavesEffect>top movies</a>
-      </li>
-      <li class="nav-item filter-item">
-        <a class="nav-link waves-light" mdbWavesEffect>upcoming movies</a>
-      </li>
+      <form >
+        <li class="nav-item ml-4" >
+          <select
+            class="browser-default custom-select filter-item w-100 form-control"
+            (change)="onChange($event.target.value)"
+          >
+            <option value="0" selected>All Movie</option>
+            <option value="1">top movies</option>
+            <option value="2">upcoming movies</option>
+            <option value="3">now playing movies</option>
+          </select>
+        </li>
 
-      <li class="nav-item filter-item">
-        <a class="nav-link waves-light" mdbWavesEffect>now playing movies</a>
-      </li>
-      <!-- <li class="nav-item mr-auto">
-      <select class="browser-default custom-select filter-item">
-        <option selected>Open this select menu</option>
-        <option value="1">top movies</option>
-        <option value="2">upcoming movies</option>
-        <option value="3">now playing movies</option>
-      </select>
-</li> -->
+      </form>
+
     </ul>
     <!-- Links -->
-
   </links>
   <!-- Collapsible content -->
-
-
 </mdb-navbar>
 <!--/.Navbar-->

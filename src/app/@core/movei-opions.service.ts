@@ -11,7 +11,7 @@ flag: boolean;
 
 
 
-addFavouriteMovie(movie){
+addfavouriteMovie(movie){
 
   this.flag = false
   for (let item of this.movies) {
@@ -30,7 +30,7 @@ addFavouriteMovie(movie){
   for (let item of this.movies) {
     if (item.id === movie.id) {
       // console.log(this.movies);
-      localStorage.setItem('favouriteMovie', JSON.stringify(this.movies));
+      localStorage.setItem('favouriteMovies', JSON.stringify(this.movies));
       console.log(this.movies);
     }
   }
@@ -66,10 +66,10 @@ addLikeMovie(movie){
     // Save In LocalStorage
     saveInLocalStorge() {
       // check if shopping cart is empty or not
-      if (localStorage.getItem('favouriteMovie') === null) {
+      if (localStorage.getItem('favouriteMovies') === null) {
         this.movies = []
       } else {
-        this.movies = JSON.parse(localStorage.getItem('favouriteMovie'));
+        this.movies = JSON.parse(localStorage.getItem('favouriteMovies'));
         // console.log(this.products);
       }
     }

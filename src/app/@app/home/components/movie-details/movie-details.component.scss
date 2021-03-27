@@ -65,19 +65,11 @@
     }
 
   }
-  .comment {
-    p {
-      margin: 20px 40px 6px 0;
-      cursor: pointer;
-      font-weight: bold;
-      text-transform: capitalize;
-      color: rgb(153, 20, 20);
-      &:hover {
-        color: #6ea000;
-      }
-    }
+ .play
+ {
+  font-size: 50px;
 
-  }
+}
 }
 
 ::ng-deep {

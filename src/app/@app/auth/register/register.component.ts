@@ -13,8 +13,8 @@ export class RegisterComponent implements OnInit {
   hidenPass: boolean = true
   constructor (
     private fb: FormBuilder,
-   private _authService:AuthService
-    ) {
+    private _authService: AuthService
+  ) {
 
   }
 
@@ -33,9 +33,9 @@ export class RegisterComponent implements OnInit {
   }
   createForm(form) {
 
-    let body =form.value
-this._authService.post('register',body)
-this.registerationForm.reset()
+    let body = form.value
+    this._authService.post('register', body)
+    this.registerationForm.reset()
   }
   // to confirm Password
   match(password, confirmPass) {
@@ -53,7 +53,7 @@ this.registerationForm.reset()
   hidePass() {
     this.hidenPass = !this.hidenPass
   }
-    // to hide and show confirm password
+  // to hide and show confirm password
 
   hideConfirmPass() {
     this.hidenConfirm = !this.hidenConfirm;

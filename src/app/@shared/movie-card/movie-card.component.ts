@@ -1,5 +1,7 @@
+import { DataService } from './../../@core/data.service';
+import { filter } from 'rxjs/operators';
 import { MoveiOpionsService } from './../../@core/movei-opions.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,21 +11,24 @@ import { Router } from '@angular/router';
 })
 export class MovieCardComponent implements OnInit {
   favouriteData: Object;
+  isFavouritePage = window.location.href.includes('favourite');
+
   constructor (
     private router: Router,
-private _moveiOpionsService:MoveiOpionsService
+    private _moveiOpionsService: MoveiOpionsService,
+    private _dataService:DataService
   ) {
-
+this.favouritMovies = JSON.parse(localStorage.getItem('favouriteMovies'))
   }
   @Input() item: any;
 
   @Input() data;
-  favouritMovie: any = [];
+  @Output() movieId
+  favouritMovies: any = [];
   favouriteStuts: boolean = true;
-  like:boolean=true
+  like: boolean = true
   ngOnInit(): void {
     this._moveiOpionsService.saveInLocalStorge();
-    this.favouritMovie =JSON.parse(localStorage.getItem('favouriteMovie'));
 
   }
 
@@ -31,71 +36,54 @@ private _moveiOpionsService:MoveiOpionsService
 
   addFavouriteMovi(movie) {
 
-this._moveiOpionsService.addFavouriteMovie(movie)
+    this._moveiOpionsService.addfavouriteMovie(movie)
     this.favouriteStuts = !this.favouriteStuts;
   }
 
 
-  removeFavouriteMovi(movieID) {
-    if (JSON.parse(localStorage.getItem('favouriteMovie'))) {
-      this.favouritMovie = JSON.parse(localStorage.getItem('favouriteMovie'));
-      for (let item of this.favouritMovie) {
-        if (item.id === movieID) {
-          console.log(movieID, " ", item.id);
-          console.log(this.favouritMovie.indexOf(item));
+  removeFavouriteMovie(movieID) {
+    if (confirm("are you sure to delete this movie !") === true) {
+      // if (JSON.parse(localStorage.getItem('favouriteMovies'))) {
+      //   this.favouritMovies = JSON.parse(localStorage.getItem('favouriteMovies'));
+      //   for (let item of this.favouritMovies) {
+      //     if (item.id === movieID) {
+      //       this.favouritMovies.splice(this.favouritMovies.indexOf(item), 1);
+      //       localStorage.setItem('favouriteMovies', JSON.stringify(this.favouritMovies))
 
-          this.favouritMovie.splice(this.favouritMovie.indexOf(item), 1);
-          console.log(this.favouritMovie);
-          localStorage.setItem('favouriteMovie', JSON.stringify(this.favouritMovie))
+      //     }
+      //   }
 
-        }
-      }
+      // }
+      this._dataService.removeMovie(movieID)
 
-      for (let item of this._moveiOpionsService.movies) {
-        if (item.id === movieID) {
-          this._moveiOpionsService.movies.splice(this._moveiOpionsService.movies.indexOf(item), 1);
 
-        }
-      }
+    } else {
+      return false
     }
     this.favouriteStuts = !this.favouriteStuts;
 
   }
 
   likeMovi(movie) {
-
     this._moveiOpionsService.addLikeMovie(movie)
-        this.like = !this.like;
+    this.like = !this.like;
+  }
 
-      }
-      disLikeMovi(movieID) {
-        if (JSON.parse(localStorage.getItem('likeMovie'))) {
-          this.favouritMovie = JSON.parse(localStorage.getItem('likeMovie'));
-          for (let item of this.favouritMovie) {
-            if (item.id === movieID) {
-              console.log(movieID, " ", item.id);
-              console.log(this.favouritMovie.indexOf(item));
+  disLikeMovi(movieID) {
+    if (JSON.parse(localStorage.getItem('likeMovie'))) {
+      this.favouritMovies = JSON.parse(localStorage.getItem('likeMovie'));
+      for (let item of this.favouritMovies) {
+        if (item.id === movieID) {
+          this.favouritMovies.splice(this.favouritMovies.indexOf(item), 1);
+          localStorage.setItem('likeMovie', JSON.stringify(this.favouritMovies))
 
-              this.favouritMovie.splice(this.favouritMovie.indexOf(item), 1);
-              console.log(this.favouritMovie);
-              localStorage.setItem('likeMovie', JSON.stringify(this.favouritMovie))
-
-            }
-          }
-
-          for (let item of this._moveiOpionsService.movies) {
-            if (item.id === movieID) {
-              this._moveiOpionsService.movies.splice(this._moveiOpionsService.movies.indexOf(item), 1);
-
-            }
-          }
         }
-        // this._moveiOpionsService.addFavouriteMovie(movie)
-            this.like = !this.like;
-          }
+      }
+    }
+    this.like = !this.like;
+  }
   toMovieDetails(id) {
     this.router.navigate([`/home/movie-details/${id}`])
-    console.log("hi from details");
 
   }
 }

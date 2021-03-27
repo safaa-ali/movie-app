@@ -1,9 +1,11 @@
+import { USERS } from './user-data';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
-
+import { Observable, Subject } from 'rxjs';
+import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,8 +20,7 @@ export class ConnectionService {
     return this.http.get(url)
   }
   getOneMovie(id){
-return this.http.get(`https://api.tvmaze.com/shows/1/episodebynumber?season=1&number=${id}`)
-
+      return this.http.get(`https://api.tvmaze.com/shows/1/episodebynumber?season=1&number=${id}`)
   }
 // function to get movies from firbase
   getAll(collectionName) {
@@ -40,10 +41,15 @@ return this.http.get(`https://api.tvmaze.com/shows/1/episodebynumber?season=1&nu
         .then(res => { }, err => reject(err));
     });
   }
-  Search(search, url) {
-    const params = new HttpParams()
-      .append('search', search);
-       return this.http.get<any>(url,{params});
-
+  public uploadImage(collectionName,image: File){
+    const formData = new FormData();
+    formData.append('image', image);
+    // return this.http.post('comments', formData);
+    return new Promise<any>((resolve, reject) => {
+      this.firestore
+        .collection(collectionName)
+        .add(formData)
+        .then(res => { }, err => reject(err));
+    });
   }
 }

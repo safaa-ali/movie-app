@@ -12,10 +12,10 @@
 
         <div class="card__overlay">
           <div class="overlay__text">
-            <img
-              src="//cdn.syncfusion.com/content/images/forum/syncfusion_logo.png"
-              alt=""
-            />
+
+            <p class="white-text">
+              <mdb-icon class="play" fas icon="play-circle"></mdb-icon>
+            </p>
           </div>
         </div>
       </div>
@@ -28,7 +28,9 @@
     </div>
   </div>
   <div class="comment">
-    <p class="waves-light" (click)="test.toggle()" mdbWavesEffect>
+
+    <app-comment></app-comment>
+    <!-- <p class="waves-light" (click)="test.toggle()" mdbWavesEffect>
       Type comment
     </p>
 <form   [formGroup]="commentForm">
@@ -46,7 +48,7 @@
       Send Comment
     </button>
   </div>
-</form>
+</form> -->
 
   </div>
 </div>

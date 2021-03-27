@@ -1,3 +1,4 @@
+
 import { User } from './user';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -16,6 +17,7 @@ export class AuthService {
   userEmail: any;
   userPassword: any;
   token
+
   constructor (
     private firestore: AngularFirestore,
     private router: Router,
@@ -34,35 +36,46 @@ export class AuthService {
   }
 
   logout() {
-    this._currentUserSubject.next(null);
+    // this._currentUserSubject.next(null);
     localStorage.clear();
-    // this.router.navigate(['auth/login']);
+    this.router.navigate(['/home']);
     window.alert(" you not login now")
   }
+
   // Sign in with email/password we should have this email and paswword to navigate to guard route
   SignIn(email, password) {
 
     this.firestore.collection('register').snapshotChanges().subscribe((res: any) => {
       let productdata = []
       res.forEach(item => {
-        this.token = { ...item.payload._firestore.sa.options };
+        this.token = { ...item.payload.doc._delegate._firestore._firestoreClient.user.uid }
 
         productdata.push({ ...item.payload.doc.data() })
-        console.log(productdata);
+
+        this.user= productdata.filter(item => item.email == email);
 
       });
-      productdata.forEach(element => {
-        this.userEmail = element.email
+
+
+
+      this.user.forEach(element => {
+        this.userEmail = element.email;
         this.userPassword = element.password
+      });
+      console.log(this.userEmail);
+      console.log(this.userPassword);
 
-      })
       if (this.userEmail === email && this.userPassword === password) {
+        localStorage.setItem("userInfo", JSON.stringify(this.user))
         localStorage.setItem("satellizer_token", JSON.stringify(this.token))
-        this.router.navigate(['home']);
 
-      } else {
-        window.alert("Please Sign Up Before ")
+        this.router.navigate(['/home']);
+      }
+      else {
+        window.alert("Please Sign Up First ! ")
         this.router.navigate(['auth/signup']);
+        localStorage.clear();
+
       }
 
     });

@@ -16,7 +16,7 @@ const routes: Routes = [
       },
       {
         path:'favourite-movie',component:FavouriteViewComponent,
-        // canActivate:[AuthGuard]
+        canActivate:[AuthGuard]
 
       },
       {
@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path:'comment',component:CommentComponent,
-        // canActivate:[AuthGuard]
+        canActivate:[AuthGuard]
 
       },
     ]

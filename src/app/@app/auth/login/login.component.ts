@@ -30,11 +30,12 @@ ngOnInit(){
   createForm(form) {
     let email = form.value.email;
     let password = form.value.password;
+    console.log(email," ",password);
+
     this._authService.SignIn(email, password)
     localStorage.setItem("user",JSON.stringify(form.value));
-    // this.router.navigate(['home']);
 
-    this.loginForm.reset()
+    this.loginForm.reset();
   }
   // to hide and show password
   hidePass() {
