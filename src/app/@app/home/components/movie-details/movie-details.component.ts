@@ -33,16 +33,7 @@ export class MovieDetailsComponent implements  OnInit{
     });
   }
 ngOnInit(){
-  this.commentForm=this.fb.group({
-    comment:'',
-    })
+  
 }
-  sendComment(){
 
-
-// const commentValue=this.commentForm.get('comment').value;
-this._connectionService.post('comment',this.commentForm.value)
-this.commentForm.reset()
-
-  }
 }

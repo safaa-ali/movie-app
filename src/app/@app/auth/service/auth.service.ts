@@ -46,11 +46,16 @@ export class AuthService {
   SignIn(email, password) {
 
     this.firestore.collection('register').snapshotChanges().subscribe((res: any) => {
+      console.log(res);
+
       let productdata = []
       res.forEach(item => {
-        this.token = { ...item.payload.doc._delegate._firestore._firestoreClient.user.uid }
+        console.log(item.payload.doc.id);
 
-        productdata.push({ ...item.payload.doc.data() })
+        this.token = (item.payload.doc.id )
+        console.log(this.token);
+
+        productdata.push({ ...item.payload.doc.data(),id:item.payload.doc.id })
 
         this.user= productdata.filter(item => item.email == email);
 

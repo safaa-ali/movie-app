@@ -8,7 +8,7 @@
     </div>
     <div class="col-lg-3">
       <div class="card">
-        <img src="{{ favouriteData.image.original }}" class="card__image" />
+        <img src="{{ favouriteData?.image?.original }}" class="card__image" />
 
         <div class="card__overlay">
           <div class="overlay__text">
@@ -22,8 +22,8 @@
     </div>
     <div class="col-lg-3">
       <div class="movie-details">
-        <h3 class="sub-title">{{ favouriteData.name }}</h3>
-        <p class="movie-details-content">{{ favouriteData.summary }}</p>
+        <h3 class="sub-title">{{ favouriteData?.name }}</h3>
+        <p class="movie-details-content">{{ favouriteData?.summary }}</p>
       </div>
     </div>
   </div>

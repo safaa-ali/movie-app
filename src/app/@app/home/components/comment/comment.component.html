@@ -23,7 +23,7 @@
           </div>
           <div class="text">
             <textarea
-              formControlName="text"
+              formControlName="comment"
               cols="10"
               rows="4"
               class="form-control"
@@ -44,13 +44,19 @@
         <div class="heading">
           <figure class="d-flex">
             <img src="{{ item.img }}" alt="User" />
-            <h2>{{ nameUser }}</h2>
+            <h2>{{ item.username}}</h2>
           </figure>
           <p class="white-text">
-            <mdb-icon fas icon="reply"></mdb-icon>
+            reply
+            <mdb-icon fas icon="reply" (click) ="reply()"></mdb-icon>
+
           </p>
+
         </div>
         <div class="text">{{ item.comment }}</div>
+
+            <div class="showInputField">
+            </div>
       </div>
     </div>
   </div>
