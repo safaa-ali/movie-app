@@ -44,54 +44,60 @@
         <div class="heading">
           <figure class="d-flex">
             <img src="{{ item.img }}" alt="User" />
-            <h2>{{ item.username}}</h2>
+            <h2>{{ item.username }}</h2>
           </figure>
           <p class="white-text">
             reply
-            <mdb-icon fas icon="reply" (click) ="reply(item.commentid)"></mdb-icon>
+            <mdb-icon
+              fas
+              icon="reply"
+              (click)="reply(item.commentid)"
+            ></mdb-icon>
           </p>
-
         </div>
         <div class="text">{{ item.comment }}</div>
         <div>
           <ol>
-          <li *ngFor="let rep of item.reply">{{rep.reply}}</li>
-        </ol>
-
+            <li *ngFor="let rep of item.reply">{{ rep.reply }}</li>
+          </ol>
         </div>
 
-            <div class="showInputField" [id]="item?.commentid">
-              <form [formGroup]="replyForm" (ngSubmit)="onSubmitReply(replyForm,item.id)">
-                <div class="heading">
-                  <figure class="d-flex">
-                    <label for="imgInput">
-                      <img class="img"
-                        src="./../../../../../assets/images/pngtree-user-vector-avatar-png-image_1541962.jpg"
-                      />
-                    </label>
-                    <input
-                      type="file"
-                      id="imgInput"
-                      class="text-nowrap text-truncate"
-                      (change)="uploadImage($event)"
-                    />
-                  </figure>
-                </div>
-                <div class="text">
-                  <textarea
-                    formControlName="reply"
-                    cols="10"
-                    rows="4"
-                    class="form-control"
-                    placeholder="Your reply here ..."
-                  >
-                  </textarea>
-                </div>
-                <button type="submit" mdbBtn color="warning" mdbWavesEffect>
-                  send reply
-                </button>
-              </form>
+        <div class="showInputField" [id]="item?.commentid">
+          <form
+            [formGroup]="replyForm"
+            (ngSubmit)="onSubmitReply(replyForm, item.id)"
+          >
+            <div class="heading">
+              <figure class="d-flex">
+                <label for="imgInput">
+                  <img
+                    class="img"
+                    src="./../../../../../assets/images/pngtree-user-vector-avatar-png-image_1541962.jpg"
+                  />
+                </label>
+                <input
+                  type="file"
+                  id="imgInput"
+                  class="text-nowrap text-truncate"
+                  (change)="uploadImage($event)"
+                />
+              </figure>
             </div>
+            <div class="text">
+              <textarea
+                formControlName="reply"
+                cols="10"
+                rows="4"
+                class="form-control"
+                placeholder="Your reply here ..."
+              >
+              </textarea>
+            </div>
+            <button type="submit" mdbBtn color="warning" mdbWavesEffect>
+              send reply
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

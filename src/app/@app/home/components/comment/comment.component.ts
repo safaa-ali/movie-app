@@ -23,7 +23,8 @@ export class CommentComponent implements OnInit {
   isReplyHidden = false
   replyBody: any;
   replyImage: any;
-  replyarray: any;
+  commentObjec: any
+
   constructor (private _connectionService: ConnectionService, private fb: FormBuilder) {
     this.commentForm = this.fb.group({
       comment: new FormControl(null),
@@ -69,6 +70,7 @@ export class CommentComponent implements OnInit {
       }
     }
   }
+  // to send and save comment in firease
   onSubmit(form) {
     if (this.userName) {
       const commentdata = {
@@ -80,7 +82,6 @@ export class CommentComponent implements OnInit {
         reply: []
 
       };
-      console.log(commentdata);
 
       //  this._connectionService.post('comments',commentdata)
       this._connectionService.create(commentdata, 'comments').then(re => {
@@ -91,30 +92,19 @@ export class CommentComponent implements OnInit {
     } else {
       alert('Please login first to can type comment')
     }
-    /**
-     * {uidComment:'',
-     * commentreply:"",
-     * userid:""
-     * }
-     */
 
   }
-
+  // to display reply box with comment id
   reply(id) {
     document.getElementById(id).style.display = 'block'
   }
-  commentObjec
   onSubmitReply(replyForm, id) {
-    console.log(id);
 
     this._connectionService.getOne(id, 'comments').subscribe((res: any) => {
       console.log(res);
       res.id = id
       this.replyBody = replyForm.value.reply;
-      //       this.replyForm.get("reply").value.forEach(element => {
-      // console.log(element);
 
-      //       });
       console.log(this.replyBody);
 
       this.replyImage = replyForm.value.replyImg;
