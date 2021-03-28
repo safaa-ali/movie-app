@@ -10,7 +10,7 @@
             <figure class="d-flex">
               <label for="imgInput">
                 <img
-                  src="./../../../../../assets/images/pngtree-user-vector-avatar-png-image_1541962.jpg"
+                  src="./../../../../../assets/images/user-placeholder-300x200.png"
                 />
               </label>
               <input
@@ -48,15 +48,20 @@
           </figure>
           <p class="white-text">
             reply
-            <mdb-icon fas icon="reply" (click) ="reply()"></mdb-icon>
-
+            <mdb-icon fas icon="reply" (click) ="reply(item.commentid)"></mdb-icon>
           </p>
 
         </div>
         <div class="text">{{ item.comment }}</div>
+        <div>
+          <ol>
+          <li *ngFor="let rep of item.reply">{{rep.reply}}</li>
+        </ol>
 
-            <div class="showInputField" [hidden]="!isReplyHidden">
-              <form [formGroup]="replyForm" (ngSubmit)="onSubmitReply(replyForm)">
+        </div>
+
+            <div class="showInputField" [id]="item?.commentid">
+              <form [formGroup]="replyForm" (ngSubmit)="onSubmitReply(replyForm,item.id)">
                 <div class="heading">
                   <figure class="d-flex">
                     <label for="imgInput">
@@ -78,7 +83,7 @@
                     cols="10"
                     rows="4"
                     class="form-control"
-                    placeholder="Your comment here ..."
+                    placeholder="Your reply here ..."
                   >
                   </textarea>
                 </div>

@@ -27,12 +27,13 @@ export class ConnectionService {
     return  this.firestore.collection(collectionName).snapshotChanges();
   }
 
-//   update (collectionName,data) {
-//     return this.firestore
-//         .collection(collectionName)
-//         .doc(data.payload.doc.id)
-//         .set({ completed: true }, { merge: true });
-//  }
+
+  update (collectionName,data) {
+    return this.firestore
+        .collection(collectionName)
+        .doc(data.payload.doc.id)
+        .set({ completed: true }, { merge: true });
+ }
   post(collectionName, data) {
     return new Promise<any>((resolve, reject) => {
       this.firestore
@@ -41,15 +42,18 @@ export class ConnectionService {
         .then(res => { }, err => reject(err));
     });
   }
-  public uploadImage(collectionName,image: File){
-    const formData = new FormData();
-    formData.append('image', image);
-    // return this.http.post('comments', formData);
-    return new Promise<any>((resolve, reject) => {
-      this.firestore
-        .collection(collectionName)
-        .add(formData)
-        .then(res => { }, err => reject(err));
-    });
+
+  create(object, objectName: string) {
+    return this.firestore.collection(objectName).add(object);
+  }
+
+  getOne(objectId: string, objectName: string) {
+    return this.firestore.collection(objectName).doc(objectId).valueChanges();
+  }
+  // tslint:disable-next-line: typedef
+  updateO(object, objectName: string) {
+    return this.firestore
+      .doc(objectName + '/' + object.id)
+      .set(object, { merge: true  });
   }
 }

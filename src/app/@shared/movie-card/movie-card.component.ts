@@ -60,7 +60,7 @@ this.favouritMovies = JSON.parse(localStorage.getItem('favouriteMovies'))
       return false
     }
     this.favouriteStuts = !this.favouriteStuts;
-
+    JSON.parse(localStorage.getItem('favouriteMovies'));
   }
 
   likeMovi(movie) {

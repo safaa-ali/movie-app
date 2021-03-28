@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { DataService } from './../../../../@core/data.service';
 import { ConnectionService } from './../../../../@core/connection.service';
 import { Component, OnInit } from '@angular/core';
-
+import { v4 as uuid } from 'uuid';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -15,15 +15,16 @@ export class CommentComponent implements OnInit {
   selectedImage: any;
   url: string | ArrayBuffer;
   commentForm: FormGroup;
-  replyForm:FormGroup
+  replyForm: FormGroup
   userName: any;
   nameUser: string;
   commentId
   userId: any;
-  isReplyHidden=false
+  isReplyHidden = false
   replyBody: any;
   replyImage: any;
-  constructor (private _connectionService: ConnectionService,  private fb: FormBuilder) {
+  replyarray: any;
+  constructor (private _connectionService: ConnectionService, private fb: FormBuilder) {
     this.commentForm = this.fb.group({
       comment: new FormControl(null),
       img: new FormControl(null)
@@ -40,18 +41,17 @@ export class CommentComponent implements OnInit {
     this._connectionService.getAll("comments").subscribe((res: any) => {
       let commentData = []
       res.forEach(element => {
-        commentData.push({ fireId: element.payload.doc.id, ...element.payload.doc.data() })
+        commentData.push({ id: element.payload.doc.id, ...element.payload.doc.data() })
       });
       this.comments = [...commentData]
       console.log(this.comments);
-      this.commentId=this.comments[0].fireId;
 
     })
 
 
     this.userName = JSON.parse(localStorage.getItem('userInfo'))
 
-    this.nameUser = this.userName[0].fName+ " " + this.userName[0].lName;
+    this.nameUser = this.userName[0].fName + " " + this.userName[0].lName;
     this.userId = JSON.parse(localStorage.getItem('satellizer_token'))
 
   }
@@ -63,91 +63,85 @@ export class CommentComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (_event) => {
         this.url = reader.result;
-        console.log(this.url);
         this.commentForm.get('img').setValue(this.url); // when change image value will be updated
         this.replyForm.get('replyImg').setValue(this.url); // when change image value will be updated
 
       }
     }
   }
-  onSubmit(form){
-    if(this.userName){
+  onSubmit(form) {
+    if (this.userName) {
       const commentdata = {
-        userid:this.userId,
-        comment: this.commentForm.get('comment').value ,
+        userid: this.userId,
+        comment: this.commentForm.get('comment').value,
         img: this.commentForm.get('img').value,
-        username:this.nameUser,
-        commentid:this.commentId,
-        replyComment:[{
-           reply:this.replyBody,
-           replyImg:this.replyImage,
-           uidComment:this.commentId,
-           userid:this.userId,
-          }] ,
+        username: this.nameUser,
+        commentid: uuid(),
+        reply: []
+
       };
       console.log(commentdata);
 
-     this._connectionService.post('comments',commentdata)
-     this.commentForm.reset()
-    }else{
+      //  this._connectionService.post('comments',commentdata)
+      this._connectionService.create(commentdata, 'comments').then(re => {
+        console.log(re);
+
+      })
+      this.commentForm.reset()
+    } else {
       alert('Please login first to can type comment')
     }
-/**
- * {uidComment:'',
- * commentreply:"",
- * userid:""
- * }
- */
+    /**
+     * {uidComment:'',
+     * commentreply:"",
+     * userid:""
+     * }
+     */
 
   }
 
-  reply(){
-    // let row = document.createElement('div');
-    //   row.className = 'row col-lg-8 comment-container';
-    //   row.innerHTML = `
-
-    //   // <form [formGroup]="replyForm" (ngSubmit)="onSubmitReply(replyForm)">
-    //   //   <div class="heading">
-    //   //     <figure class="d-flex">
-    //   //       <label for="imgInput">
-    //   //         <img class="img"
-    //   //           src="./../../../../../assets/images/pngtree-user-vector-avatar-png-image_1541962.jpg"
-    //   //         />
-    //   //       </label>
-    //   //       <input
-    //   //         type="file"
-    //   //         id="imgInput"
-    //   //         class="text-nowrap text-truncate"
-    //   //         (change)="uploadImage($event)"
-    //   //       />
-    //   //     </figure>
-    //   //   </div>
-    //   //   <div class="text">
-    //   //     <textarea
-    //   //       formControlName="reply"
-    //   //       cols="10"
-    //   //       rows="4"
-    //   //       class="form-control"
-    //   //       placeholder="Your comment here ..."
-    //   //     >
-    //   //     </textarea>
-    //   //   </div>
-    //   //   <button type="submit" mdbBtn color="primary" mdbWavesEffect>
-    //   //     send reply
-    //   //   </button>
-    //   // </form>
-    // `
-    ;
-      // document.querySelector('.showInputField').appendChild(row);
-      this.isReplyHidden = !this.isReplyHidden
+  reply(id) {
+    document.getElementById(id).style.display = 'block'
   }
-  onSubmitReply(replyForm){
+  commentObjec
+  onSubmitReply(replyForm, id) {
+    console.log(id);
 
-  this.replyBody=  replyForm.value.reply;
-  this.replyImage=  replyForm.value.replyImg;
+    this._connectionService.getOne(id, 'comments').subscribe((res: any) => {
+      console.log(res);
+      res.id = id
+      this.replyBody = replyForm.value.reply;
+      //       this.replyForm.get("reply").value.forEach(element => {
+      // console.log(element);
 
-  console.log(this.replyImage," ",this.replyBody);
+      //       });
+      console.log(this.replyBody);
 
+      this.replyImage = replyForm.value.replyImg;
+
+      const replayData = {
+        reply: this.replyBody,
+        replyImg: this.replyImage,
+        commentId: uuid(),
+        userid: this.userId,
+
+      }
+      if (res?.reply) {
+        res.reply.push(replayData)
+      }
+      else {
+        res.reply = [replayData]
+      }
+      this.commentObjec = res
+
+    })
+    setTimeout(() => {
+
+      this._connectionService.updateO(this.commentObjec, 'comments')
+    }, 100);
+    this.replyForm.reset();
+    document.getElementById(this.commentObjec.commentid).style.display = 'none'
   }
+
 }
 
