@@ -30,14 +30,17 @@ export class CommentComponent implements OnInit {
       comment: new FormControl(null),
       img: new FormControl(null)
     });
-    this.replyForm = this.fb.group({
-      reply: new FormControl(null),
-      replyImg: new FormControl(null),
-    })
+
   }
-
+  replyCom:FormControl;
+  replyImg: FormControl
   ngOnInit(): void {
-
+    // this.replyForm = this.fb.group({
+    //   reply: new FormControl(null),
+    //   replyImg: new FormControl(null),
+    // })
+    this.replyCom = new FormControl(null);
+    this.replyImg = new FormControl(null);
     // get all comments from firebase and display it
     this._connectionService.getAll("comments").subscribe((res: any) => {
       let commentData = []
@@ -65,7 +68,7 @@ export class CommentComponent implements OnInit {
       reader.onload = (_event) => {
         this.url = reader.result;
         this.commentForm.get('img').setValue(this.url); // when change image value will be updated
-        this.replyForm.get('replyImg').setValue(this.url); // when change image value will be updated
+        this.replyImg.setValue(this.url); // when change image value will be updated
 
       }
     }
@@ -95,42 +98,44 @@ export class CommentComponent implements OnInit {
 
   }
   // to display reply box with comment id
-  reply(id) {
-    document.getElementById(id).style.display = 'block'
+  reply(id, itemId) {
+    document.getElementById(id).style.display = 'block';
+    this._connectionService.getOne(itemId, 'comments').subscribe((res: any) => {
+
+      this.response = res
+    })
   }
-  onSubmitReply(replyForm, id) {
 
-    this._connectionService.getOne(id, 'comments').subscribe((res: any) => {
-      console.log(res);
-      res.id = id
-      this.replyBody = replyForm.value.reply;
+  response
+  onSubmitReply(  id) {
+    console.log(this.replyForm);
+    // let response;
+    // this._connectionService.getOne(id, 'comments').subscribe((res: any) => {
+    //   response = res
+    // })
 
-      console.log(this.replyBody);
 
-      this.replyImage = replyForm.value.replyImg;
+    setTimeout(() => {
+      console.log(this.response, id);
 
+      this.response['id'] =id;
       const replayData = {
-        reply: this.replyBody,
-        replyImg: this.replyImage,
+        reply:  this.replyCom.value,
+        replyImg: this.replyImg.value,
         commentId: uuid(),
         userid: this.userId,
-
+usernameReply:this.nameUser
       }
-      if (res?.reply) {
-        res.reply.push(replayData)
+      if (this.response?.reply) {
+        this.response.reply.push({...replayData})
       }
       else {
-        res.reply = [replayData]
+        this.response.reply = [{...replayData}]
       }
-      this.commentObjec = res
-
-    })
-    setTimeout(() => {
-
-      this._connectionService.updateO(this.commentObjec, 'comments')
+      this._connectionService.updateO(this.response, 'comments')
     }, 100);
-    this.replyForm.reset();
-    document.getElementById(this.commentObjec.commentid).style.display = 'none'
+  
+    document.getElementById(id).style.display = 'none'
   }
 
 }

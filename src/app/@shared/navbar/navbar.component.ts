@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
   @Output() try = new EventEmitter<string>()
 userName:any
   nameUser: any= "User"
+  registerUser: any;
+  nameUserregister: string;
   constructor (
     private _authService: AuthService,
     private _connectionService: ConnectionService,
@@ -26,11 +28,14 @@ userName:any
     this._connectionService.get('https://api.tvmaze.com/shows/1/episodes').subscribe(res => {
       this.movies = res
     })
-    this.userName = JSON.parse(localStorage.getItem('userInfo'))
+      this.userName = JSON.parse(localStorage.getItem('userInfo'))
 
-this.nameUser = this.userName[0].fName+ " " + this.userName[0].lName
+      this.nameUser = this.userName[0].fName + " " + this.userName[0].lName ;
 
 
+//       this.registerUser = JSON.parse(localStorage.getItem('register'))
+//       this.nameUserregister = this.registerUser[0].fName + " " + this.registerUser.lName
+//       console.log(this.nameUser);
 
   }
   logout() {

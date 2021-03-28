@@ -51,21 +51,27 @@
             <mdb-icon
               fas
               icon="reply"
-              (click)="reply(item.commentid)"
+              (click)="reply(item.commentid ,item.id)"
             ></mdb-icon>
           </p>
         </div>
         <div class="text">{{ item.comment }}</div>
-        <div>
-          <ol>
-            <li *ngFor="let rep of item.reply">{{ rep.reply }}</li>
+        <div *ngFor="let rep of item.reply" >
+          <ol >
+            <li >
+              <img src="{{ rep.replyImg }}" alt="">
+              <a >{{ rep.usernameReply }}</a>
+            </li>
+
+            <li class="text-reply">{{ rep.reply }}</li>
+
           </ol>
         </div>
 
         <div class="showInputField" [id]="item?.commentid">
           <form
-            [formGroup]="replyForm"
-            (ngSubmit)="onSubmitReply(replyForm, item.id)"
+
+
           >
             <div class="heading">
               <figure class="d-flex">
@@ -85,7 +91,7 @@
             </div>
             <div class="text">
               <textarea
-                formControlName="reply"
+                [formControl]="replyCom"
                 cols="10"
                 rows="4"
                 class="form-control"
@@ -93,7 +99,7 @@
               >
               </textarea>
             </div>
-            <button type="submit" mdbBtn color="warning" mdbWavesEffect>
+            <button type="submit" (click)="onSubmitReply(  item.id)" mdbBtn color="warning" mdbWavesEffect>
               send reply
             </button>
           </form>

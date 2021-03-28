@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   constructor (
     private fb: FormBuilder,
     private _authService: AuthService,
-    private router:Router
+    private router: Router
   ) {
 
   }
@@ -38,6 +38,8 @@ export class RegisterComponent implements OnInit {
     let body = form.value
     this._authService.post('register', body)
     this.registerationForm.reset();
+    console.log(body);
+    localStorage.setItem("register", JSON.stringify(body))
     this.router.navigate(['./home'])
   }
   // to confirm Password
